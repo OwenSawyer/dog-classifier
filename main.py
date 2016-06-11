@@ -4,7 +4,6 @@ import numpy as np
 
 import sys
 sys.path.append('imagenet')
-import classify_image
 
 //x = tf.placeholder("float", [None, 784])
 //sess = tf.Session()
@@ -28,7 +27,9 @@ def mnist():
     //output1 = simple(input)
     //output2 = convolutional(input)
     //return jsonify(results=[output1, output2])
-    return jsonify(classify_image())
+    with open("classify_image.py") as f:
+	code=compile(f.read(),"classify_read.py"),'exec')
+    return jsonify(exec(code))
 
 @app.route('/')
 def main():
