@@ -33,7 +33,6 @@ class Main {
 		    $('#output').text(data);
                 }
             });
-        };
         img.src = this.canvas.toDataURL();
     }
 }
