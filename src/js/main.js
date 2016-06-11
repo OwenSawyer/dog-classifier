@@ -5,7 +5,7 @@ class Main {
     }
     initialize() {
         $.ajax({
-            url: '/api/x',
+            url: '/api/mnist',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(inputs),
