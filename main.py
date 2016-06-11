@@ -11,7 +11,7 @@ from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/api/mnist', methods=['POST'])
+@app.route('/api/mnist', methods=['GET'])
 def mnist():
     #input = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(1, 784)
     #output1 = simple(input)

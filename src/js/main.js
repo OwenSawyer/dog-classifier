@@ -3,7 +3,7 @@ $(document).ready(function(){
 	alert("Here");
 	$.ajax({
 	    url: '/api/mnist',
-	    method: 'POST',
+	    method: 'GET',
 	    contentType: 'application/json',
 	    data: JSON.stringify(inputs),
 	    success: (data) => {
