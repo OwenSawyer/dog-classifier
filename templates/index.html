@@ -4,7 +4,7 @@
     <title>MNIST</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('src', filename='js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
   </head>
   <body>
     <div class="container">
@@ -24,3 +24,24 @@
     </div>
   </body>
 </html>
+
+<script>
+$(document).ready(function(){
+  $('#click').click(function() { 
+	alert("Here");
+	$.ajax({
+	    url: '/api/mnist',
+	    method: 'GET',
+	    contentType: 'application/json',
+	    data: JSON.stringify(inputs),
+	    success: (data) => {
+		$('#output').text(data);
+	    },
+	    error: (err) => {
+		alert("err");
+	    }
+	});
+    	return false;
+  });
+});
+</script>
