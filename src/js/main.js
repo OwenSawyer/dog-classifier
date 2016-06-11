@@ -18,7 +18,5 @@ class Main {
 
 $(() => {
     var main = new Main();
-    $('#clear').click(() => {
-        main.initialize();
-    });
+    main.initialize();
 });
