@@ -23,6 +23,7 @@ def mnist():
     ret = classify_image.run_inference_on_image('cropped_panda.jpg')
     return jsonify(ret)
 
+
 @app.route('/')
 def main():
     return render_template('index.html')
