@@ -53,7 +53,7 @@ FLAGS = tf.app.flags.FLAGS
 # imagenet_2012_challenge_label_map_proto.pbtxt:
 #   Text representation of a protocol buffer mapping a label to synset ID.
 tf.app.flags.DEFINE_string(
-    'model_dir', '/tmp/imagenet',
+    'model_dir', '',
     """Path to classify_image_graph_def.pb, """
     """imagenet_synset_to_human_label_map.txt, and """
     """imagenet_2012_challenge_label_map_proto.pbtxt.""")
@@ -176,10 +176,14 @@ def run_inference_on_image(image):
     node_lookup = NodeLookup()
 
     top_k = predictions.argsort()[-FLAGS.num_top_predictions:][::-1]
+
+    ret = ""
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
+      ret += ('%s (score = %.5f)' % (human_string, score))
       print('%s (score = %.5f)' % (human_string, score))
+    return ret
 
 
 def maybe_download_and_extract():
@@ -202,10 +206,10 @@ def maybe_download_and_extract():
 
 
 def main(_):
-  maybe_download_and_extract()
-  image = (FLAGS.image_file if FLAGS.image_file else
-           os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
-  run_inference_on_image(image)
+  #maybe_download_and_extract()
+  #image = (FLAGS.image_file if FLAGS.image_file else
+   #        os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
+  run_inference_on_image('cropped_panda.jpg')
 
 
 if __name__ == '__main__':

@@ -4,6 +4,7 @@ import numpy as np
 
 import sys
 sys.path.append('imagenet')
+import classify_image
 
 # webapp
 from flask import Flask, jsonify, render_template, request
@@ -19,6 +20,8 @@ def mnist():
     //with open("classify_image.py") as f:
 //	code=compile(f.read(),"classify_read.py"),'exec')
    //return jsonify(exec(code))
+    ret = classify_image.run_inference_on_image('cropped_panda.jpg')
+    return jsonify(ret)
 
 @app.route('/')
 def main():
