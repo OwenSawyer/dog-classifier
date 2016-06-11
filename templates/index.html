@@ -22,26 +22,24 @@
         </div>
       </div>
     </div>
+	<script>
+	$('#click').click(function() { 
+		alert("Here");
+		$.ajax({
+			url: '/api/mnist',
+			method: 'GET',
+			contentType: 'application/json',
+			data: JSON.stringify(inputs),
+			success: (data) => {
+			$('#output').text(data);
+			},
+			error: (err) => {
+			alert("err");
+			}
+		});
+		return false;
+	});
+	</script>
   </body>
 </html>
 
-<script>
-$(document).ready(function(){
-  $('#click').click(function() { 
-	alert("Here");
-	$.ajax({
-	    url: '/api/mnist',
-	    method: 'GET',
-	    contentType: 'application/json',
-	    data: JSON.stringify(inputs),
-	    success: (data) => {
-		$('#output').text(data);
-	    },
-	    error: (err) => {
-		alert("err");
-	    }
-	});
-    	return false;
-  });
-});
-</script>
