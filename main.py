@@ -5,17 +5,6 @@ import numpy as np
 import sys
 sys.path.append('imagenet')
 
-//x = tf.placeholder("float", [None, 784])
-//sess = tf.Session()
-
-//with tf.variable_scope("convolutional"):
-//    keep_prob = tf.placeholder("float")
-//    y2, variables = model.convolutional(x, keep_prob)
-//saver = tf.train.Saver(variables)
-//saver.restore(sess, "mnist/data/convolutional.ckpt")
-//def convolutional(input):
-//    return sess.run(y2, feed_dict={x: input, keep_prob: 1.0}).flatten().tolist()
-
 # webapp
 from flask import Flask, jsonify, render_template, request
 
@@ -27,9 +16,9 @@ def mnist():
     //output1 = simple(input)
     //output2 = convolutional(input)
     //return jsonify(results=[output1, output2])
-    with open("classify_image.py") as f:
-	code=compile(f.read(),"classify_read.py"),'exec')
-    return jsonify(exec(code))
+    //with open("classify_image.py") as f:
+//	code=compile(f.read(),"classify_read.py"),'exec')
+   //return jsonify(exec(code))
 
 @app.route('/')
 def main():
