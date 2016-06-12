@@ -20,11 +20,11 @@ def mnist():
     #with open("classify_image.py") as f:
     #code=compile(f.read(),"classify_read.py"),'exec')
     #return jsonify(exec(code))
-    ret = classify_image.run_inference_on_image('cropped_panda.jpg');
-    alert("here2");
-    console.log("here2");
-    return jsonify(ret)
-
+    #ret = classify_image.run_inference_on_image('cropped_panda.jpg');
+    #alert("here2");
+    #console.log("here2");
+    #return jsonify(ret)
+    return jsonify("aaa");
 
 @app.route('/')
 def main():
