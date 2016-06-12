@@ -13,7 +13,8 @@ app = Flask(__name__)
 
 @app.route('/api/classify', methods=['POST'])
 def classify():
-    return 'data', 200
+    ret = classify_image.run_inference_on_image('cropped_panda.jpg');
+    return jsonify(ret), 200
 
 @app.route('/')
 def main():
