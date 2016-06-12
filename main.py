@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route('/api/mnist', methods=['POST'])
 def mnist():
-    return jsonify({'task': {'aa':'aa'}}), 200
+    return 'data', 200
 
 @app.route('/')
 def main():
