@@ -23,23 +23,22 @@
       </div>
     </div>
 	<script>
-	$('#click').click(function() { 
+	$('#click').click(function() {
 		alert("Here");
 		$.ajax({
 			url: '/api/mnist',
 			method: 'GET',
 			contentType: 'application/json',
-			data: JSON.stringify(inputs),
-			success: (data) => {
-			$('#output').text(data);
-			},
-			error: (err) => {
-			alert("err");
-			}
+			data: JSON.stringify('aaa'),
+      success: function(data){
+        alert(data);
+      },
+      error: function(err){
+        alert('error!');
+      }
 		});
 		return false;
 	});
 	</script>
   </body>
 </html>
-
