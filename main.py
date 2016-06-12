@@ -11,8 +11,8 @@ from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/api/mnist', methods=['POST'])
-def mnist():
+@app.route('/api/classify', methods=['POST'])
+def classify():
     return 'data', 200
 
 @app.route('/')

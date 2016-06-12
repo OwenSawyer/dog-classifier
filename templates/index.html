@@ -24,21 +24,7 @@
     </div>
 	<script>
 	$('#click').click(function() {
-		alert("Here");
-		// $.ajax({
-		// 	url: '/api/mnist',
-		// 	method: 'POST',
-		// 	contentType: 'text/html',
-		// 	data: "ayy",
-    //   success: function(data){
-    //     alert(data);
-    //   },
-    //   error: function(err){
-    //     alert(err);
-    //     alert('error!');
-    //   }
-		// });
-    var posting = $.post('/api/mnist', 'www.com' );
+    var posting = $.post('/api/classify', 'www.com' );
     posting.done(function( data ) {
       $('#output').text(data);
     });
