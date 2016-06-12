@@ -1,14 +1,8 @@
-# restore trained data
-import tensorflow as tf
-import numpy as np
-
-import sys
-
-from flask import Flask, jsonify, render_template, request
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
+from flask import Flask, jsonify, render_template, request
 
 import os.path
 import re
@@ -172,3 +166,4 @@ def classify():
 @app.route('/')
 def main():
     return render_template('index.html')
+
