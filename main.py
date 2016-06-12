@@ -158,7 +158,7 @@ app = Flask(__name__)
 
 @app.route('/api/classify', methods=['POST'])
 def classify():
-    ret = run_inference_on_image('cropped_panda.jpg');
+    ret = run_inference_on_image('static/cropped_panda.jpg');
     console.log("here");
     alert("Here");
     return ret, 200
