@@ -154,14 +154,10 @@ def run_inference_on_image(image):
       print('%s (score = %.5f)' % (human_string, score))
     return ret
 
-app = Flask(__name__)
-
-@app.route('/api/classify', methods=['POST'])
 def classify():
     ret = run_inference_on_image('imagenet/cropped_panda.jpg');
-    return ret, 200
+    print("here")
+    return ret
 
-@app.route('/')
-def main():
-    return render_template('index.html')
+
 
