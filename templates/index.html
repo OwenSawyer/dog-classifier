@@ -40,8 +40,7 @@
 		// });
     var posting = $.post('/api/mnist', { 'aa': 'aa' } );
     posting.done(function( data ) {
-      alert(data);
-      alert('success');
+      $('#output').text(data);
     });
 		return false;
 	});
