@@ -164,9 +164,11 @@ def parse(string):
         #print(name)
         #print(score)
         json = {}
-        json[name]=score
+        json['name']=name
+        json['score']=score
         predictions.append(json)
-    return predictions
+    return predictions[:-1]
+
 
 app = Flask(__name__)
 
