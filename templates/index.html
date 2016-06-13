@@ -28,7 +28,7 @@
     </div>
 	<script>
 	$('#click').click(function() {
-    var posting = $.post('/api/classify', 'www.com' );
+    var posting = $.post('/api/classify', $('#click').serialize());
     posting.done(function( data ) {
       $('#output').html("");
       $.each(data.results, function(idx, obj) {
