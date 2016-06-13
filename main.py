@@ -151,17 +151,31 @@ def run_inference_on_image(image):
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
       ret += ('%s (score = %.5f)' % (human_string, score))
+      ret += "*"
       print('%s (score = %.5f)' % (human_string, score))
     return ret
+
+def parse(string):
+    predictions = []
+    pieces = string.split("*")
+    for i in range(len(pieces)):
+        name = pieces[i].split("(")[0][:-1]
+        score = pieces[i][-8:-1]
+        #print(name)
+        #print(score)
+        json = {}
+        json[name]=score
+        predictions.append(json)
+    return predictions
 
 app = Flask(__name__)
 
 @app.route('/api/classify', methods=['POST'])
 def classify():
     ret = run_inference_on_image('imagenet/cropped_panda.jpg');
-    return ret, 200
+    ret = parse(ret)
+    return jsonify(results = ret), 200
 
 @app.route('/')
 def main():
     return render_template('index.html')
-

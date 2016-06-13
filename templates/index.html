@@ -26,7 +26,13 @@
 	$('#click').click(function() {
     var posting = $.post('/api/classify', 'www.com' );
     posting.done(function( data ) {
-      $('#output').text(data);
+      //$('#output').text(data);
+      $.each(data.results, function(idx, obj) {
+        $('#output').append(obj.name);
+        $('#output').append(obj.score);
+        $('#output').append('<br><br>');
+
+      });
     });
 		return false;
 	});
