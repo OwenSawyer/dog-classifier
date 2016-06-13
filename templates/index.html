@@ -27,10 +27,10 @@
       </div>
     </div>
 	<script>
-	$('#click').click(function() {
+	$('#click').submit(function() {
     var posting = $.post('/api/classify', $('#click').serialize());
     posting.done(function( data ) {
-      $('#output').html("");
+      $('#output').val("");
       $.each(data.results, function(idx, obj) {
         $('#output').append(obj.name + "  ");
         $('#output').append(obj.score);
