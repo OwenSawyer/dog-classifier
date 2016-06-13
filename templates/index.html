@@ -13,7 +13,9 @@
         <div class="col-md-6">
           <p>poop</p>
           <p>
-            <button id="click" name="click" class="btn btn-default">LCICK ME</button>
+          <form id="click" name="click">
+            <input type="submit" name="form" value="Send">
+          </form>
           </p>
         </div>
         <div class="col-md-6">
@@ -26,9 +28,9 @@
 	$('#click').click(function() {
     var posting = $.post('/api/classify', 'www.com' );
     posting.done(function( data ) {
-      //$('#output').text(data);
+      $('#output').html("");
       $.each(data.results, function(idx, obj) {
-        $('#output').append(obj.name);
+        $('#output').append(obj.name + "  ");
         $('#output').append(obj.score);
         $('#output').append('<br><br>');
 
