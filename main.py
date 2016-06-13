@@ -174,7 +174,8 @@ app = Flask(__name__)
 
 @app.route('/api/classify', methods=['POST'])
 def classify():
-    ret = run_inference_on_image('imagenet/shibalarge.jpg');
+    pic=request.form['search']
+    ret = run_inference_on_image('imagenet/'+pic);
     ret = parse(ret)
     return jsonify(results = ret), 200
 
