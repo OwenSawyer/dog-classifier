@@ -237,7 +237,7 @@ app = Flask(__name__)
 def classify():
     os.chdir('./imagenet')
     pic = request.form['search']
-    if !fetch_picture(pic):
+    if not fetch_picture(pic):
         return "Could not download image", 400
     os.chdir('..')
     ret = run_inference_on_image('imagenet/'+pic[-15:]);
