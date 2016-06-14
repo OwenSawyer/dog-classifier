@@ -28,9 +28,9 @@
     </div>
 	<script>
 	$('#click').submit(function() {
-    var posting = $.post('/api/classify', $('#click').serialize());
+    var posting = $.post('/api/classify', $('#click').serializeObject());
     posting.done(function( data ) {
-      $('#output').val("");
+      $('#output').html("");
       $.each(data.results, function(idx, obj) {
         $('#output').append(obj.name + "  ");
         $('#output').append(obj.score);
