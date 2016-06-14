@@ -4,14 +4,19 @@ from __future__ import print_function
 
 from flask import Flask, jsonify, render_template, request
 
-import os.path
+import os
 import re
 import sys
 import tarfile
+import copy
 
 import numpy as np
 from six.moves import urllib
 import tensorflow as tf
+
+######################################
+#.............TENSORFLOW.............#
+######################################
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -155,6 +160,10 @@ def run_inference_on_image(image):
       print('%s (score = %.5f)' % (human_string, score))
     return ret
 
+######################################
+#...............HELPER...............#
+######################################
+
 def parse(string):
     predictions = []
     pieces = string.split("*")
@@ -169,13 +178,69 @@ def parse(string):
         predictions.append(json)
     return predictions[:-1]
 
+def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
+    '''
+    Timeout function for when retreiving images
+    From:
+    http://code.activestate.com/recipes/473878-timeout-function-using-threading/
+    '''
+    import threading
+    class InterruptableThread(threading.Thread):
+        def __init__(self):
+            threading.Thread.__init__(self)
+            self.result = None
+
+        def run(self):
+            try:
+                self.result = func(*args, **kwargs)
+            except:
+                self.result = default
+
+    it = InterruptableThread()
+    it.start()
+    it.join(timeout_duration)
+    if it.isAlive():
+        return False
+    else:
+        return it.result
+
+def fetch_picture(url):
+    '''
+    Does a thing
+    '''
+    testfile = urllib.URLopener()
+    timeout(testfile.retrieve, (url, url[-15:]), {}, 500)
+
+    if os.path.isfile(url[-15:]):
+        #remove corrupt file
+        if os.path.getsize(url[-15:]) <= 1024:
+            return False
+        else:
+            return True
+            #resizing image
+            #try:
+                #image = scipy.misc.imread(url)
+                #image_data = (open(url, 'rb').read())
+                #image = scipy.misc.imresize(image,(size,size))
+                #imsave(image[:-4]+'large.jpg', img)
+                #os.remove(filename)
+                #print filename
+                #i += 1
+            #except:
+                #return -1
+
+    return False
 
 app = Flask(__name__)
 
 @app.route('/api/classify', methods=['POST'])
 def classify():
-    pic=request.form['search']
-    ret = run_inference_on_image('imagenet/'+pic);
+    os.chdir('./imagenet')
+    pic = request.form['search']
+    if !fetch_picture(pic):
+        return "Could not download image", 400
+    os.chdir('..')
+    ret = run_inference_on_image('imagenet/'+pic[-15:]);
     ret = parse(ret)
     return jsonify(results = ret), 200
 
