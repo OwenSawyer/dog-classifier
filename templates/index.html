@@ -20,6 +20,9 @@
         <button class="btn btn-lg btn-primary btn-block" type="button">Do</button>
       </form>
     </div>
+    <p>RESULTS:</p>
+    <div name="output">
+    </div>
 
   </body>
 </html>
@@ -32,7 +35,12 @@
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
-                alert(response.results);
+              $('#output').empty();
+              $.each(reponse.results, function(idx, obj) {
+                $('#output').append(obj.name + "  ");
+                $('#output').append(obj.score);
+                $('#output').append('<br><br>');
+              });
             },
             error: function(error) {
                 alert(error);
