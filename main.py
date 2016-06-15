@@ -236,9 +236,10 @@ app = Flask(__name__)
 @app.route('/api/classify', methods=['POST'])
 def classify():
     #print("Hee", file=sys.stderr);
-    os.chdir('./imagenet')
+    #os.chdir('./imagenet')
     pic = request.form['search']
-    return pic, 200
+    return json.dumps({'status':'OK','data':pic});
+    #return pic, 200
     # if not fetch_picture(pic):
     #     return "Could not download image", 400
     # os.chdir('..')
