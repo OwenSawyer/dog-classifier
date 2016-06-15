@@ -31,12 +31,13 @@
     var posting = $.post('/api/classify', $('#click').serializeObject());
     posting.done(function( data ) {
       $('#output').html("");
-      $.each(data.results, function(idx, obj) {
-        $('#output').append(obj.name + "  ");
-        $('#output').append(obj.score);
-        $('#output').append('<br><br>');
+      $('#output').append(data);
+    //  $.each(data.results, function(idx, obj) {
+        //$('#output').append(obj.name + "  ");
+        //$('#output').append(obj.score);
+        //$('#output').append('<br><br>');
 
-      });
+    //  });
     });
 		return false;
 	});
