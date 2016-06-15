@@ -238,7 +238,8 @@ def classify():
     #print("Hee", file=sys.stderr);
     #os.chdir('./imagenet')
     pic = request.form['search']
-    return json.dumps({'status':'OK','data':pic});
+    return jsonify(results = pic), 200
+    #return json.dumps({'status':'OK','data':pic});
     #return pic, 200
     # if not fetch_picture(pic):
     #     return "Could not download image", 400
