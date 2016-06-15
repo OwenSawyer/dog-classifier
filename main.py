@@ -239,12 +239,12 @@ def classify():
     os.chdir('./imagenet')
     pic = request.form['search']
     return pic, 200
-    if not fetch_picture(pic):
-        return "Could not download image", 400
-    os.chdir('..')
-    ret = run_inference_on_image('imagenet/'+pic[-15:]);
-    ret = parse(ret)
-    return jsonify(results = ret), 200
+    # if not fetch_picture(pic):
+    #     return "Could not download image", 400
+    # os.chdir('..')
+    # ret = run_inference_on_image('imagenet/'+pic[-15:]);
+    # ret = parse(ret)
+    # return jsonify(results = ret), 200
 
 @app.route('/')
 def main():

@@ -28,7 +28,7 @@
     </div>
 	<script>
 	$('#click').submit(function() {
-    var posting = $.post('/api/classify', $('#click').serializeObject());
+    var posting = $.post('/api/classify', $("#click").serialize() );
     posting.done(function( data ) {
       $('#output').html("");
       $('#output').append(data);
@@ -39,7 +39,6 @@
 
     //  });
     });
-		return false;
 	});
 	</script>
   </body>
