@@ -9,9 +9,10 @@ import re
 import sys
 import tarfile
 import copy
+import urllib
 
 import numpy as np
-from six.moves import urllib
+#from six.moves import urllib
 import tensorflow as tf
 
 ######################################
@@ -208,8 +209,8 @@ def fetch_picture(url):
     '''
     Does a thing
     '''
-    testfile = urllib.URLopener()
-    timeout(testfile.retrieve, (url, url[-15:]), {}, 500)
+    testfile = urllib.request
+    timeout(testfile.urlretrieve, (url, url[-15:]), {}, 500)
 
     if os.path.isfile(url[-15:]):
         #remove corrupt file
@@ -231,16 +232,17 @@ def fetch_picture(url):
 
     return False
 
+
 app = Flask(__name__)
 
 @app.route('/api/classify', methods=['POST'])
 def classify():
     pic = request.form['search']
     #return jsonify(results = pic), 200
-    os.chdir('./imagenet')
+    os.chdir("imagenet")
     if not fetch_picture(pic):
         return "Could not download image", 400
-    os.chdir('..')
+    os.chdir("..")
     ret = run_inference_on_image('imagenet/'+pic[-15:]);
     ret = parse(ret)
     return jsonify(results = ret), 200
