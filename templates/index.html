@@ -36,7 +36,7 @@
             type: 'POST',
             success: function(response) {
               $('#output').empty();
-              $.each(reponse.results, function(idx, obj) {
+              $.each(response.results, function(idx, obj) {
                 $('#output').append(obj.name + "  ");
                 $('#output').append(obj.score);
                 $('#output').append('<br><br>');
@@ -48,5 +48,4 @@
         });
     });
   });
-
 	</script>
