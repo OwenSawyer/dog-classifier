@@ -239,10 +239,10 @@ app = Flask(__name__)
 def classify():
     pic = request.form['search']
     #return jsonify(results = pic), 200
-	os.chdir("imagenet")
+    os.chdir("imagenet")
     if not fetch_picture(pic):
         return "Could not download image", 400
-    os.chdir('..')
+    os.chdir("..")
     ret = run_inference_on_image('imagenet/'+pic[-15:]);
     ret = parse(ret)
     return jsonify(results = ret), 200
