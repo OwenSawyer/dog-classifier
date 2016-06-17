@@ -21,8 +21,7 @@
       </form>
     </div>
     <p>RESULTS:</p>
-    <div name="output">
-    </div>
+    <div name="output" id="output"></div>
 
   </body>
 </html>
@@ -35,11 +34,12 @@
             data: $('form').serialize(),
             type: 'POST',
             success: function(res) {
-              $('#output').empty();
-              for (var i=0; i <= res.results.length; i++) {
+              $('#output').html("");
+              var i
+              for (i=0; i <= 4; i++) {
                 $('#output').append(res.results[i].name + "  ");
                 $('#output').append(res.results[i].score);
-                $('#output').append('<br><br>');
+                $('#output').append("<br><br>");
               }
             },
             error: function(error) {
