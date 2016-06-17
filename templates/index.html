@@ -35,6 +35,10 @@
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
+              alert(response);
+              alert(response.results);
+              alert(response.result[0]);
+              alert(response.result[1]);
               $('#output').empty();
               $.each(response.results, function(idx, obj) {
                 $('#output').append(obj.name + "  ");
