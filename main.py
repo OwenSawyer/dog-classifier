@@ -250,10 +250,10 @@ def classify():
 @app.route('/')
 def main():
     return render_template('index.html')
-    
+
 @app.route('/loadProgress')
 def get_page():
-    return send_file('progress.html')
+    return send_file('templates/progress.html')
 
 @app.route('/progress')
 def progress():
