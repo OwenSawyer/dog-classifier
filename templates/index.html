@@ -34,17 +34,13 @@
             url: '/api/classify',
             data: $('form').serialize(),
             type: 'POST',
-            success: function(response) {
-              alert(response);
-              alert(response.results);
-              alert(response.result[0]);
-              alert(response.result[1]);
+            success: function(res) {
               $('#output').empty();
-              $.each(response.results, function(idx, obj) {
-                $('#output').append(obj.name + "  ");
-                $('#output').append(obj.score);
+              for (var i=0; i <= res.results.length; i++) {
+                $('#output').append(res.results[i].name + "  ");
+                $('#output').append(res.results[i].score);
                 $('#output').append('<br><br>');
-              });
+              }
             },
             error: function(error) {
                 alert(error);
