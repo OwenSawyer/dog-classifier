@@ -41,8 +41,6 @@
             data: $('form').serialize(),
             type: 'POST',
             success: function(res) {
-              $( "#temp" ).hide();
-              $( "#bar" ).hide();
               $('#output').html("");
               for (var i=0; i <= res.results.length; i++) {
                 $('#output').append(res.results[i].name + "  ");
