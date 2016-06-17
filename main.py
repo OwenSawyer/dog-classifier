@@ -253,7 +253,7 @@ def main():
 
 @app.route('/loadProgress')
 def get_page():
-    return send_file('templates/progress.html')
+    return send_file("templates/progress.html")
 
 @app.route('/progress')
 def progress():
@@ -263,5 +263,5 @@ def progress():
             print (x)
             x = x + 10
             time.sleep(1.5)
-        return 
+        return
     return Response(generate(), mimetype= 'text/event-stream')
