@@ -2,8 +2,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from flask import Flask, jsonify, render_template, request
-
+from flask import Flask, jsonify, render_template, request, send_file, Response
+import time
 import os
 import re
 import sys
@@ -250,3 +250,18 @@ def classify():
 @app.route('/')
 def main():
     return render_template('index.html')
+    
+@app.route('/loadProgress')
+def get_page():
+    return send_file('progress.html')
+
+@app.route('/progress')
+def progress():
+    def generate():
+        x = 0
+        while x < 100:
+            print (x)
+            x = x + 10
+            time.sleep(1.5)
+            yield "data:" + str(x) + "\n\n"
+    return Response(generate(), mimetype= 'text/event-stream')
