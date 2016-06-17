@@ -29,7 +29,7 @@
 	<script>
   $(function() {
     $('#sendButton').click(function() {
-      $( "#temp" ).load( "progress.html" );
+      $( "#temp" ).load( "templates/progress.html" );
       $.ajax({url: "/loadProgress", success: function(result){
   			$("#bar").html(result);
         var input = $('#search').val();
