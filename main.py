@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from flask import Flask, jsonify, render_template, request, send_file, Response
+from flask import Flask, jsonify, render_template, request, send_file, Response, send_from_directory
 import time
 import os
 import re
@@ -228,7 +228,7 @@ def fetch_picture(url):
 
     return False
 
-
+root = os.path.join(os.path.dirname(os.path.abspath(__file__)));
 app = Flask(__name__)
 
 @app.route('/api/classify', methods=['POST'])
