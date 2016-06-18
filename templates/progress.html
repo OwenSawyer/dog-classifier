@@ -8,11 +8,10 @@
     var source = new EventSource("/progress");
     source.onmessage = function(event) {
         $('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
-    }
-    if ($('.progress-bar').css('width') == '100%')
-    {
-       source = undefined;
-       $('.progress-bar').hide();
+        if (event.data === 100){
+          source = undefined;
+          $('.progress-bar').hide();
+        }
     }
     </script>
 </head>
