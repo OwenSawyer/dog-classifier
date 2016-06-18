@@ -35,24 +35,25 @@
     $('button').click(function() {
       $.ajax({url: "/loadProgress", success: function(result){
   			$("#bar").html(result);
-  		}});
-      var input = $('#search').val();
-      $.ajax({
-          url: '/api/classify',
-          data: $('form').serialize(),
-          type: 'POST',
-          success: function(res) {
-            $('#output').html("");
-            for (var i=0; i <= res.results.length; i++) {
-              $('#output').append(res.results[i].name + "  ");
-              $('#output').append(res.results[i].score);
-              $('#output').append("<br><br>");
+        var input = $('#search').val();
+        $.ajax({
+            url: '/api/classify',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(res) {
+              $('#output').html("");
+              for (var i=0; i <= res.results.length; i++) {
+                $('#output').append(res.results[i].name + "  ");
+                $('#output').append(res.results[i].score);
+                $('#output').append("<br><br>");
+              }
+            },
+            error: function(error) {
+                alert(error);
             }
-          },
-          error: function(error) {
-              alert(error);
-          }
-      });
+            return false;
+        });
+  		}});
     });
   });
 	</script>
