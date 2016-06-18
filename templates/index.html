@@ -25,32 +25,19 @@
     <div name="output" id="output"></div>
 
   </body>
-</html>
-	<script>
-  $(function() {
+  <script>
+  $(document).ready(function(){
     $('#sendButton').click(function() {
-      $( "#temp" ).load( "templates/progress.html" );
-      $.ajax({url: "/loadProgress", success: function(result){
-  			$("#bar").html(result);
-        var input = $('#search').val();
-
-        $.ajax({
-            url: '/api/classify',
-            data: $('form').serialize(),
-            type: 'POST',
-            success: function(res) {
-              $('#output').html("");
-              for (var i=0; i <= res.results.length; i++) {
-                $('#output').append(res.results[i].name + "  ");
-                $('#output').append(res.results[i].score);
-                $('#output').append("<br><br>");
-              }
-            },
-            error: function(error) {
-                alert(error);
-            }
-        });
-  		}});
+      $( "#temp" ).load( "progress.html" );
+      $.ajax({
+        url: "/loadProgress",
+        success: function(result){
+          $("#bar").html(result);
+          var input = $('#search').val();
+        }
+      });
     });
+    return false;
   });
-	</script>
+  </script>
+</html>
