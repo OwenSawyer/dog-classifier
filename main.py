@@ -247,9 +247,9 @@ def classify():
 def main():
     return render_template('index.html')
 
-@app.route('/loadProgress')
-def get_page():
-    return send_file('progress.html')
+# @app.route('/loadProgress')
+# def get_page():
+#     return send_file('progress.html')
 
 @app.route('/progress')
 def progress():
@@ -260,4 +260,5 @@ def progress():
             x = x + 10
             time.sleep(1.5)
             yield "data:" + str(x) + "\n\n"
+        return
     return Response(generate(), mimetype= 'text/event-stream')
