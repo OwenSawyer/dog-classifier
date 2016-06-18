@@ -58,11 +58,9 @@ class NodeLookup(object):
 
   def load(self, label_lookup_path, uid_lookup_path):
     """Loads a human readable English name for each softmax node.
-
     Args:
       label_lookup_path: string UID to integer node ID.
       uid_lookup_path: string UID to human-readable string.
-
     Returns:
       dict from integer node ID to human-readable string.
     """
@@ -119,10 +117,8 @@ def create_graph():
 
 def run_inference_on_image(image):
   """Runs inference on an image.
-
   Args:
     image: Image file name.
-
   Returns:
     Nothing
   """
@@ -253,7 +249,7 @@ def main():
 
 @app.route('/loadProgress')
 def get_page():
-    return send_file("templates/progress.html")
+    return send_file('progress.html')
 
 @app.route('/progress')
 def progress():
@@ -263,5 +259,5 @@ def progress():
             print (x)
             x = x + 10
             time.sleep(1.5)
-        return
-    return Response(generate(), mimetype= 'text/event-stream')
+            yield "data:" + str(x) + "\n\n"
+return Response(generate(), mimetype= 'text/event-stream')
