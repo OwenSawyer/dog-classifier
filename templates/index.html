@@ -56,8 +56,6 @@
         success: function(res) {
           $('#output').html("");
           for (var i=0; i <= res.results.length; i++) {
-            source.close();
-            $('.progress-bar').hide();
             $('#output').append(res.results[i].name + "  ");
             $('#output').append(res.results[i].score);
             $('#output').append("<br><br>");
