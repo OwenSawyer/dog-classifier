@@ -41,38 +41,44 @@
     }
   </script> -->
 	<script>
-  $(function() {
-    var source = null;
-    $('button').click(function() {
-        source = new EventSource("/progress");
-        source.onmessage = function(event) {
-          $('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
-        }
+  $.wait = function(ms) {
+      var defer = $.Deferred();
+      setTimeout(function() { defer.resolve(); }, ms);
+      return defer;
+  };
 
-        if (source !== null) {
-          $('.progress-bar').show();
-          var input = $('#search').val();
-          $.ajax({
-              url: '/api/classify',
-              data: $('form').serialize(),
-              type: 'POST',
-              success: function(res) {
-                $('#output').html("");
-                for (var i=0; i <= res.results.length; i++) {
-                  source.close();
-                  $('.progress-bar').hide();
-                  $('#output').append(res.results[i].name + "  ");
-                  $('#output').append(res.results[i].score);
-                  $('#output').append("<br><br>");
-                }
-                return false;
-              },
-              error: function(error) {
-                  alert(error);
-                  return false;
-              }
-          });
+  var getResults = function() {
+    var input = $('#search').val();
+    $.ajax({
+        url: '/api/classify',
+        data: $('form').serialize(),
+        type: 'POST',
+        success: function(res) {
+          $('#output').html("");
+          for (var i=0; i <= res.results.length; i++) {
+            source.close();
+            $('.progress-bar').hide();
+            $('#output').append(res.results[i].name + "  ");
+            $('#output').append(res.results[i].score);
+            $('#output').append("<br><br>");
+          }
+          return false;
+        },
+        error: function(error) {
+            alert(error);
+            return false;
         }
+    });
+  };
+
+  $(function() {
+    $('button').click(function() {
+      source = new EventSource("/progress");
+      source.onmessage = function(event) {
+        $('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
+      };
+
+      $.wait(5000).then(getResults());
 		});
   });
 	</script>
