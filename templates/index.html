@@ -42,39 +42,37 @@
   </script> -->
 	<script>
   $(function() {
+    var source = null;
     $('button').click(function() {
-      $.when(
-        var source = new EventSource("/progress");
+        source = new EventSource("/progress");
         source.onmessage = function(event) {
           $('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
-        } )
-      .done(function( data ) {
-        $('.progress-bar').show();
-        var input = $('#search').val();
-        $.ajax({
-            url: '/api/classify',
-            data: $('form').serialize(),
-            type: 'POST',
-            success: function(res) {
-              $('#output').html("");
-              for (var i=0; i <= res.results.length; i++) {
-                source.close();
-                $('.progress-bar').hide();
-                $('#output').append(res.results[i].name + "  ");
-                $('#output').append(res.results[i].score);
-                $('#output').append("<br><br>");
-              }
-              return false;
-            },
-            error: function(error) {
-                alert(error);
+        }
+
+        if (source !== null) {
+          $('.progress-bar').show();
+          var input = $('#search').val();
+          $.ajax({
+              url: '/api/classify',
+              data: $('form').serialize(),
+              type: 'POST',
+              success: function(res) {
+                $('#output').html("");
+                for (var i=0; i <= res.results.length; i++) {
+                  source.close();
+                  $('.progress-bar').hide();
+                  $('#output').append(res.results[i].name + "  ");
+                  $('#output').append(res.results[i].score);
+                  $('#output').append("<br><br>");
+                }
                 return false;
-            }
-        });
-      })
-      .fail(function(){
-        alert("promise chain failed");
-      });
+              },
+              error: function(error) {
+                  alert(error);
+                  return false;
+              }
+          });
+        }
 		});
   });
 	</script>
