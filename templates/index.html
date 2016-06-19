@@ -43,29 +43,34 @@
 	<script>
   $(function() {
     $('button').click(function() {
-      var source = new EventSource("/progress");
-      source.onmessage = function(event) {
+      $.when(
+        var source = new EventSource("/progress");
+        source.onmessage = function(event) {
           $('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
-      }
-      var input = $('#search').val();
-      $.ajax({
-          url: '/api/classify',
-          data: $('form').serialize(),
-          type: 'POST',
-          success: function(res) {
-            $('#output').html("");
-            for (var i=0; i <= res.results.length; i++) {
-              $('.progress-bar').hide();
-              $('#output').append(res.results[i].name + "  ");
-              $('#output').append(res.results[i].score);
-              $('#output').append("<br><br>");
-            }
-            return false;
-          },
-          error: function(error) {
-              alert(error);
+        } )
+      .then(function( data ) {
+        $('.progress-bar').show();
+        var input = $('#search').val();
+        $.ajax({
+            url: '/api/classify',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(res) {
+              $('#output').html("");
+              for (var i=0; i <= res.results.length; i++) {
+                source.close();
+                $('.progress-bar').hide();
+                $('#output').append(res.results[i].name + "  ");
+                $('#output').append(res.results[i].score);
+                $('#output').append("<br><br>");
+              }
               return false;
-          }
+            },
+            error: function(error) {
+                alert(error);
+                return false;
+            }
+        });
       });
 		});
   });
