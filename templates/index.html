@@ -48,7 +48,7 @@
         source.onmessage = function(event) {
           $('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
         } )
-      .then(function( data ) {
+      .done(function( data ) {
         $('.progress-bar').show();
         var input = $('#search').val();
         $.ajax({
@@ -71,6 +71,9 @@
                 return false;
             }
         });
+      })
+      .fail(function(){
+        alert("promise chain failed");
       });
 		});
   });
