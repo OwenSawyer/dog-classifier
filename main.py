@@ -238,7 +238,7 @@ def allowed_file(filename):
 root = os.path.join(os.path.dirname(os.path.abspath(__file__)));
 app = Flask(__name__)
 
-app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['UPLOAD_FOLDER'] = 'imagenet/'
 # These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -285,12 +285,15 @@ def upload():
         # Move the file form the temporal folder to
         # the upload folder we setup
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        # Redirect the user to the uploaded_file route, which
-        # will basicaly show on the browser the uploaded file
-        return redirect(url_for('uploaded_file',
-                                filename=filename))
+        # # Redirect the user to the uploaded_file route, which
+        # # will basicaly show on the browser the uploaded file
+        # return redirect(url_for('uploaded_file',
+        #                         filename=filename))
+        ret = run_inference_on_image('imagenet/'+filename);
+        ret = parse(ret)
+        return jsonify(results = ret), 200
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+# @app.route('/uploads/<filename>')
+# def uploaded_file(filename):
+#     return send_from_directory(app.config['UPLOAD_FOLDER'],
+#                                filename)
