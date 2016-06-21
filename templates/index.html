@@ -18,8 +18,8 @@
         <input type="text" name="search" class="form-control"required autofocus>
         <button class="btn btn-lg btn-primary btn-block" type="button">Do</button>
       </form>
-      <form action="upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file"><br /><br />
+      <form id="uploadForm" name="uploadForm">
+        <input type="file" id="file" name="file"><br /><br />
         <input type="submit" value="Upload">
       </form>
       <br><br>
@@ -84,5 +84,42 @@
 
       classify();
 		});
+
+    $('form').submit(function (e) {
+      progressBar();
+
+      var data;
+      data = new FormData();
+      data.append('file', $('#file')[0].files[0]);
+
+      $.ajax({
+          url: '/upload',
+          data: data,
+          processData: false,
+          type: 'POST',
+          contentType: 'multipart/form-data',
+          beforeSend: function (x) {
+              if (x && x.overrideMimeType) {
+                  x.overrideMimeType("multipart/form-data");
+              }
+          },
+          mimeType: 'multipart/form-data',    //Property added in 1.5.1
+          success: function (data) {
+            $('#progressBar').hide();
+            $('#output').html("");
+            for (var i=0; i <= res.results.length; i++) {
+              $('#output').append(res.results[i].name + "  ");
+              $('#output').append(res.results[i].score);
+              $('#output').append("<br><br>");
+            }
+            return false;
+          },
+          error: function(error) {
+              alert(error);
+              return false;
+          }
+      });
+      e.preventDefault();
+    });
   });
 	</script>
