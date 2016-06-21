@@ -92,7 +92,7 @@
       // data = new FormData();
       // data.append('file', $('#file')[0].files[0]);
 
-      var form_data = new FormData($('#file')[0]);
+      var form_data = new FormData($('#uploadForm')[0]);
       $.ajax({
           type: 'POST',
           url: '/upload',
