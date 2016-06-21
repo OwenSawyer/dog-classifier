@@ -88,22 +88,31 @@
     $('#uploadForm').submit(function (e) {
       progressBar();
 
-      var data;
-      data = new FormData();
-      data.append('file', $('#file')[0].files[0]);
+      // var data;
+      // data = new FormData();
+      // data.append('file', $('#file')[0].files[0]);
 
+      var form_data = new FormData($('#file')[0]);
       $.ajax({
-          url: '/upload',
-          data: data,
-          processData: false,
           type: 'POST',
-          contentType: 'multipart/form-data',
-          beforeSend: function (x) {
-              if (x && x.overrideMimeType) {
-                  x.overrideMimeType("multipart/form-data");
-              }
-          },
-          mimeType: 'multipart/form-data',    //Property added in 1.5.1
+          url: '/upload',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+
+      // $.ajax({
+      //     url: '/upload',
+      //     data: data,
+      //     processData: false,
+      //     type: 'POST',
+      //     contentType: 'multipart/form-data',
+      //     beforeSend: function (x) {
+      //         if (x && x.overrideMimeType) {
+      //             x.overrideMimeType("multipart/form-data");
+      //         }
+      //     },
+      //     mimeType: 'multipart/form-data',    //Property added in 1.5.1
           success: function (data) {
             $('#progressBar').hide();
             $('#output').html("");
