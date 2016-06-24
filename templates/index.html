@@ -129,6 +129,27 @@
     });
   }
 
+  function classifyUpload() {
+    var form_data = new FormData($('#uploadForm')[0]);
+    $.ajax({
+        type: 'POST',
+        url: '/upload',
+        data: form_data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (res) {
+          populate(res);
+          return false;
+        },
+        error: function(error) {
+            alert(error);
+            return false;
+        }
+    });
+    //e.preventDefault();
+  }
+
   function populate(res) {
     $('#progressBar').hide();
     $('#output').html("");
@@ -144,33 +165,15 @@
 
   $(function() {
     $('#progressBar').hide();
+
     $('#urlButton').click(function() {
       progressBar();
-
       classify();
 		});
 
-    $('#uploadForm').submit(function (e) {
+    $('#urlButton').click(function() {
       progressBar();
-
-      var form_data = new FormData($('#uploadForm')[0]);
-      $.ajax({
-          type: 'POST',
-          url: '/upload',
-          data: form_data,
-          contentType: false,
-          cache: false,
-          processData: false,
-          success: function (res) {
-            populate(res);
-            return false;
-          },
-          error: function(error) {
-              alert(error);
-              return false;
-          }
-      });
-      e.preventDefault();
+      classifyUpload();
     });
   });
 	</script>
