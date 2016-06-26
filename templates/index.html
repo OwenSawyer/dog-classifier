@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="container">
-      <h2>Dynamic Tabs</h2>
+      <h2>Doggo</h2>
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">&nbsp;&nbsp;&nbsp;&nbsp;By url&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
         <li><a data-toggle="tab" href="#menu1">By Upload</a></li>
@@ -23,6 +23,7 @@
 
       <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
+          <div>http://www.dog-learn.com/dog-breeds/border-collie/images/border-collie-u1.jpg</div>
           <form class="form-signin" role="form">
             <h3 class="form-signin-heading"></h3>
             <input placeholder="Enter url" type="text" name="search" class="form-control"required autofocus>
@@ -171,7 +172,7 @@
 
     for (var i=0; i <= res.results.length; i++) {
       $('#row'+i).find('td').eq($('#picture').index()-1)
-        .html('<img src="https://classify-doggo.herokuapp.com/get_image?file=' + res.results[i].name + '" />')
+        .html('<img src="https://classify-doggo.herokuapp.com/get_image?file=' + res.results[i].name + '" height="125" />');
       // $('#row'+i).find('td').eq($('#picture').index()-1)
       //   .append(pictures[i]);
       $('#row'+i).find('td').eq($('#breed').index()-1)
