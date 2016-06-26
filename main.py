@@ -293,7 +293,7 @@ def upload():
         ret = parse(ret)
         return jsonify(results = ret), 200
 
-@app.route('/get_image', methods=['POST'])
+@app.route('/get_image', methods=['GET'])
 def get_image():
     filename = request.args.get('file')
     return send_file('helper/' + filename + '.jpg', mimetype='image/jpg')

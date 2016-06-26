@@ -158,7 +158,7 @@
       $.ajax({
           url: '/get_image',
           data: {file : res.results[j].name},
-          type: 'POST',
+          type: 'GET',
           success: function(res) {
             pictures.add(res);
           },
