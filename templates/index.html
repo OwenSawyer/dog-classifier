@@ -157,7 +157,7 @@
     for (var j=0; j<= res.results.length; j++) {
       $.ajax({
           url: '/get_image',
-          data: {'file' : res.results[j].name},
+          data: {file : res.results[j].name},
           type: 'POST',
           success: function(res) {
             pictures.add(res);
