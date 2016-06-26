@@ -171,7 +171,7 @@
 
     for (var i=0; i <= res.results.length; i++) {
       $('#row'+i).find('td').eq($('#picture').index()-1)
-        .html('<img src="https://classify-doggo.herokuapp.com/get_image?file="' + res.results[i].name + ' />')
+        .html('<img src="https://classify-doggo.herokuapp.com/get_image?file=' + res.results[i].name + '" />')
       // $('#row'+i).find('td').eq($('#picture').index()-1)
       //   .append(pictures[i]);
       $('#row'+i).find('td').eq($('#breed').index()-1)
