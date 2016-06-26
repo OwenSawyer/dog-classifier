@@ -153,9 +153,24 @@
   function populate(res) {
     $('#progressBar').hide();
     $('#output').html("");
+    var pictures = [];
+    for (var j=0; j<= res.results.length; j++) {
+      $.ajax({
+          url: '/get_image',
+          data: {'file' : res.results[j].name},
+          type: 'POST',
+          success: function(res) {
+            pictures.add(res);
+          },
+          error: function(error) {
+            alert('could not find image');
+          }
+      });
+    }
+
     for (var i=0; i <= res.results.length; i++) {
       $('#row'+i).find('td').eq($('#picture').index()-1)
-        .append("  ");
+        .append(pictures[i]);
       $('#row'+i).find('td').eq($('#breed').index()-1)
         .append(res.results[i].name + "  ");
       $('#row'+i).find('td').eq($('#probability').index()-1)

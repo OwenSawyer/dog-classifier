@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from flask import Flask, jsonify, render_template, request, send_file, Response, send_from_directory, redirect, url_for
+from flask import Flask, jsonify, render_template, request, send_file, Response, send_from_directory, redirect, url_for, request
 from werkzeug import secure_filename
 
 import time
@@ -292,6 +292,11 @@ def upload():
         ret = run_inference_on_image('imagenet/'+filename);
         ret = parse(ret)
         return jsonify(results = ret), 200
+
+@app.route('/get_image', methods=['POST'])
+def get_image():
+    filename = request.args.get('file')
+    return send_file('helper/' + filename + '.jpg', mimetype='image/jpg')
 
 # @app.route('/uploads/<filename>')
 # def uploaded_file(filename):
