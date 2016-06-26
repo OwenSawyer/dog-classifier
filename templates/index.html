@@ -160,7 +160,7 @@
           data: {file : res.results[j].name},
           type: 'GET',
           success: function(res) {
-            pictures.add(res);
+            pictures.push(res);
           },
           error: function(error) {
             alert('could not find image');
