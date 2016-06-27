@@ -13,20 +13,27 @@
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
     <style>
-    .img-zoom0, .img-zoom1, .img-zoom2, .img-zoom3, .img-zoom4 {
+    /*.img-zoom0, .img-zoom1, .img-zoom2, .img-zoom3, .img-zoom4 {
         height: 300px;
         -webkit-transition: all .2s ease-in-out;
         -moz-transition: all .2s ease-in-out;
         -o-transition: all .2s ease-in-out;
         -ms-transition: all .2s ease-in-out;
+    }*/
+
+    table td .im{
+      -webkit-transition: all .2s ease-in-out;
+      -moz-transition: all .2s ease-in-out;
+      -o-transition: all .2s ease-in-out;
+      -ms-transition: all .2s ease-in-out;
+    }
+    table td:hover .im{
+      -webkit-transform: scale(2);
+      -moz-transform: scale(2);
+      -o-transform: scale(2);
+      transform: scale(2);
     }
 
-    .transition {
-        -webkit-transform: scale(2);
-        -moz-transform: scale(2);
-        -o-transform: scale(2);
-        transform: scale(2);
-    }
     </style>
 
   </head>
@@ -56,6 +63,7 @@
         </div>
       </div>
     </div>
+    <br /><br />
 
     <div class="container progress">
       <div id="progressBar" name="progressBar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
@@ -63,54 +71,55 @@
       </div>
     </div>
 
-
+<!--
     <div>
       <p>RESULTS:</p>
       <div name="output" id="output"></div>
+    </div> -->
+    <div class="container">
+      <table class="table table-hover" id="resultsTable">
+      <thead>
+        <tr>
+          <th id="number">#</th>
+          <th id="picture">Picture</th>
+          <th id="breed">Breed</th>
+          <th id="probability">Probability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="row0" class="success">
+          <th scope="row">1</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="row1" class="info">
+          <th scope="row">2</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="row2" class="warning">
+          <th scope="row">3</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="row3" class="warning">
+          <th scope="row">4</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="row4" class="danger">
+          <th scope="row">5</th>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      </table>
     </div>
-
-  <table class="container table table-hover" id="resultsTable">
-  <thead>
-    <tr>
-      <th id="number">#</th>
-      <th id="picture">Picture</th>
-      <th id="breed">Breed</th>
-      <th id="probability">Probability</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr id="row0" class="success">
-      <th scope="row">1</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr id="row1" class="info">
-      <th scope="row">2</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr id="row2" class="warning">
-      <th scope="row">3</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr id="row3" class="warning">
-      <th scope="row">4</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr id="row4" class="danger">
-      <th scope="row">5</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
 
   </body>
 </html>
@@ -189,7 +198,7 @@
 
     for (var i=0; i <= res.results.length; i++) {
       $('#row'+i).find('td').eq($('#picture').index()-1)
-        .html('<img class="img-zoom'+i+'" src="https://classify-doggo.herokuapp.com/get_image?file=' + res.results[i].name + '" height="125" />');
+        .html('<img class="im" src="https://classify-doggo.herokuapp.com/get_image?file=' + res.results[i].name + '" height="125" />');
       // $('#row'+i).find('td').eq($('#picture').index()-1)
       //   .append(pictures[i]);
       $('#row'+i).find('td').eq($('#breed').index()-1)
@@ -210,37 +219,6 @@
     $('#uploadButton').click(function() {
       progressBar();
       classifyUpload();
-    });
-
-    $('.img-zoom0').hover(function() {
-        $(this).addClass('transition');
-
-    }, function() {
-        $(this).removeClass('transition');
-    });
-    $('.img-zoom1').hover(function() {
-        $(this).addClass('transition');
-
-    }, function() {
-        $(this).removeClass('transition');
-    });
-    $('.img-zoom2').hover(function() {
-        $(this).addClass('transition');
-
-    }, function() {
-        $(this).removeClass('transition');
-    });
-    $('.img-zoom3').hover(function() {
-        $(this).addClass('transition');
-
-    }, function() {
-        $(this).removeClass('transition');
-    });
-    $('.img-zoom4').hover(function() {
-        $(this).addClass('transition');
-
-    }, function() {
-        $(this).removeClass('transition');
     });
   });
 	</script>
