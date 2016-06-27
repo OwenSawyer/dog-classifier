@@ -120,5 +120,6 @@ def get_category_pictures():
 
 if __name__=='__main__':
     print("start")
+    txt = open("cat_mapping.txt")
     #os.chdir('./categoryPictures')
     #fetch_picture('http://static.flickr.com/116/258440999_51087a78ff.jpg')

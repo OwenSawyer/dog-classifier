@@ -205,9 +205,9 @@
       // $('#row'+i).find('td').eq($('#picture').index()-1)
       //   .append(pictures[i]);
       $('#row'+i).find('td').eq($('#breed').index()-1)
-        .append(res.results[i].name + "  ");
+        .html(res.results[i].name + "  ");
       $('#row'+i).find('td').eq($('#probability').index()-1)
-        .append(res.results[i].score + "  ");
+        .html(res.results[i].score + "  ");
     }
   }
 
