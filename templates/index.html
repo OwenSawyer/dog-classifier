@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -172,7 +173,7 @@
 
     for (var i=0; i <= res.results.length; i++) {
       $('#row'+i).find('td').eq($('#picture').index()-1)
-        .html('<img src="https://classify-doggo.herokuapp.com/get_image?file=' + res.results[i].name + '" height="125" />');
+        .html('<img class="img-zoom'+i+'" src="https://classify-doggo.herokuapp.com/get_image?file=' + res.results[i].name + '" height="125" />');
       // $('#row'+i).find('td').eq($('#picture').index()-1)
       //   .append(pictures[i]);
       $('#row'+i).find('td').eq($('#breed').index()-1)
@@ -193,6 +194,37 @@
     $('#uploadButton').click(function() {
       progressBar();
       classifyUpload();
+    });
+
+    $('.img-zoom0').hover(function() {
+        $(this).addClass('transition');
+
+    }, function() {
+        $(this).removeClass('transition');
+    });
+    $('.img-zoom1').hover(function() {
+        $(this).addClass('transition');
+
+    }, function() {
+        $(this).removeClass('transition');
+    });
+    $('.img-zoom2').hover(function() {
+        $(this).addClass('transition');
+
+    }, function() {
+        $(this).removeClass('transition');
+    });
+    $('.img-zoom3').hover(function() {
+        $(this).addClass('transition');
+
+    }, function() {
+        $(this).removeClass('transition');
+    });
+    $('.img-zoom4').hover(function() {
+        $(this).addClass('transition');
+
+    }, function() {
+        $(this).removeClass('transition');
     });
   });
 	</script>
